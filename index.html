@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mumbly — UI/UX Design Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.10.0/dist/tabler-icons.min.css">
+<style>
+:root {
+  /* Brand Colors */
+  --mumbly-void: #0D0B14;
+  --mumbly-deep: #13101E;
+  --mumbly-surface: #1C1828;
+  --mumbly-card: #231F32;
+  --mumbly-border: rgba(255,255,255,0.08);
+  --mumbly-border2: rgba(255,255,255,0.12);
+
+  /* Accent Palette */
+  --mumbly-violet: #6B5CE7;
+  --mumbly-violet-light: #8B7EF0;
+  --mumbly-violet-glow: rgba(107,92,231,0.25);
+  --mumbly-coral: #E85D40;
+  --mumbly-coral-light: #F07A60;
+  --mumbly-amber: #F5A623;
+  --mumbly-green: #1DB974;
+  --mumbly-cyan: #22D3EE;
+
+  /* Text */
+  --text-primary: #F0EEF8;
+  --text-secondary: #9A94B8;
+  --text-muted: #5C5578;
+
+  /* Fonts */
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+
+  /* Spacing */
+  --sp-xs: 4px;
+  --sp-sm: 8px;
+  --sp-md: 16px;
+  --sp-lg: 24px;
+  --sp-xl: 40px;
+  --sp-2xl: 64px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--mumbly-void);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* ── Layout ────────────────────────────────── */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 var(--sp-lg); }
+
+/* ── Sidebar Nav ────────────────────────────── */
+.sidebar {
+  position: fixed;
+  left: 0; top: 0;
+  width: 220px;
+  height: 100vh;
+  background: var(--mumbly-deep);
+  border-right: 1px solid var(--mumbly-border);
+  padding: var(--sp-lg) var(--sp-md);
+  overflow-y: auto;
+  z-index: 100;
+}
+.sidebar-logo {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--mumbly-violet-light);
+  margin-bottom: 6px;
+  letter-spacing: -0.5px;
+}
+.sidebar-sub { font-size: 11px; color: var(--text-muted); margin-bottom: var(--sp-lg); letter-spacing: .04em; text-transform: uppercase; }
+.nav-section { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .08em; margin: var(--sp-md) 0 var(--sp-sm); font-weight: 600; }
+.nav-link {
+  display: flex; align-items: center; gap: 8px;
+  padding: 7px 10px; border-radius: 8px;
+  font-size: 13px; color: var(--text-secondary);
+  text-decoration: none; margin-bottom: 2px;
+  transition: all 0.15s;
+}
+.nav-link:hover, .nav-link.active { background: var(--mumbly-violet-glow); color: var(--mumbly-violet-light); }
+.nav-link i { font-size: 15px; }
+
+/* ── Main ────────────────────────────────────── */
+.main { margin-left: 220px; padding: var(--sp-xl) var(--sp-2xl) var(--sp-2xl); }
+
+/* ── Section Header ──────────────────────────── */
+.section { margin-bottom: var(--sp-2xl); }
+.section-num { font-size: 11px; color: var(--mumbly-violet); font-weight: 600; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 8px; }
+.section-title { font-family: var(--font-display); font-size: 34px; font-weight: 800; color: var(--text-primary); line-height: 1.1; margin-bottom: 12px; letter-spacing: -1px; }
+.section-desc { font-size: 15px; color: var(--text-secondary); max-width: 640px; line-height: 1.7; margin-bottom: var(--sp-xl); }
+
+/* ── Design Tokens ────────────────────────────── */
+.token-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin-bottom: var(--sp-lg); }
+.token-card { background: var(--mumbly-surface); border: 1px solid var(--mumbly-border); border-radius: 12px; padding: 14px; }
+.token-swatch { width: 100%; height: 40px; border-radius: 8px; margin-bottom: 10px; }
+.token-name { font-size: 12px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px; }
+.token-hex { font-size: 11px; color: var(--text-muted); font-family: monospace; }
+.token-role { font-size: 11px; color: var(--text-secondary); margin-top: 3px; }
+
+.type-scale { background: var(--mumbly-surface); border: 1px solid var(--mumbly-border); border-radius: 16px; padding: var(--sp-lg); }
+.type-row { display: flex; align-items: baseline; gap: var(--sp-md); padding: 10px 0; border-bottom: 1px solid var(--mumbly-border); }
+.type-row:last-child { border: none; }
+.type-label { width: 100px; font-size: 11px; color: var(--text-muted); flex-shrink: 0; font-family: monospace; }
+.type-sample { color: var(--text-primary); }
+.type-spec { margin-left: auto; font-size: 11px; color: var(--text-muted); font-family: monospace; white-space: nowrap; }
+
+.spacing-row { display: flex; align-items: center; gap: var(--sp-md); padding: 8px 0; }
+.sp-bar { background: var(--mumbly-violet); height: 8px; border-radius: 4px; flex-shrink: 0; }
+.sp-label { font-size: 12px; color: var(--text-secondary); }
+.sp-val { margin-left: auto; font-size: 11px; color: var(--text-muted); font-family: monospace; }
+
+/* ── Screen Cards ─────────────────────────────── */
+.screen-block {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: var(--sp-xl);
+  margin-bottom: 60px;
+  padding-bottom: 60px;
+  border-bottom: 1px solid var(--mumbly-border);
+}
+.screen-block:last-child { border: none; }
+
+.phone-frame {
+  width: 260px;
+  flex-shrink: 0;
+}
+.phone-outer {
+  width: 240px;
+  height: 480px;
+  background: #1A1A2E;
+  border-radius: 36px;
+  border: 2px solid var(--mumbly-border2);
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.03);
+}
+.phone-notch-bar {
+  height: 28px;
+  background: rgba(0,0,0,0.4);
+  display: flex; align-items: center; justify-content: center;
+}
+.phone-notch { width: 72px; height: 12px; background: #0D0B14; border-radius: 100px; }
+.phone-screen { height: calc(100% - 28px); overflow: hidden; position: relative; }
+
+.screen-info { padding-top: 4px; }
+.screen-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--mumbly-violet-glow); border: 1px solid rgba(107,92,231,0.3); border-radius: 100px; padding: 4px 12px; font-size: 11px; color: var(--mumbly-violet-light); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 14px; }
+.screen-name { font-family: var(--font-display); font-size: 26px; font-weight: 800; color: var(--text-primary); margin-bottom: 8px; letter-spacing: -0.5px; }
+.screen-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: var(--sp-lg); }
+
+.spec-block { margin-bottom: 16px; }
+.spec-label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .08em; font-weight: 600; margin-bottom: 8px; }
+.spec-list { list-style: none; }
+.spec-list li { display: flex; gap: 8px; font-size: 13px; color: var(--text-secondary); padding: 5px 0; line-height: 1.45; }
+.spec-list li::before { content: '→'; color: var(--mumbly-violet); flex-shrink: 0; font-size: 12px; margin-top: 1px; }
+
+.chip-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.chip { font-size: 11px; padding: 3px 10px; border-radius: 100px; border: 1px solid var(--mumbly-border2); color: var(--text-secondary); }
+.chip.v { background: rgba(107,92,231,0.1); border-color: rgba(107,92,231,0.3); color: var(--mumbly-violet-light); }
+.chip.c { background: rgba(232,93,64,0.1); border-color: rgba(232,93,64,0.3); color: var(--mumbly-coral-light); }
+.chip.g { background: rgba(29,185,116,0.1); border-color: rgba(29,185,116,0.3); color: var(--mumbly-green); }
+
+/* ── Phone Screen Designs ─────────────────────── */
+
+/* Onboarding */
+.ob-screen { background: var(--mumbly-void); height: 100%; padding: 20px 16px; display: flex; flex-direction: column; }
+.ob-glow { width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle, rgba(107,92,231,0.5) 0%, transparent 70%); margin: 20px auto 0; display: flex; align-items: center; justify-content: center; }
+.ob-icon { width: 64px; height: 64px; border-radius: 50%; background: var(--mumbly-violet); display: flex; align-items: center; justify-content: center; }
+.ob-title { font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--text-primary); text-align: center; margin: 16px 0 8px; letter-spacing: -0.5px; }
+.ob-sub { font-size: 12px; color: var(--text-secondary); text-align: center; line-height: 1.55; margin-bottom: 20px; }
+.ob-dots { display: flex; gap: 6px; justify-content: center; margin-bottom: 20px; }
+.ob-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--mumbly-border2); }
+.ob-dot.active { background: var(--mumbly-violet); width: 18px; border-radius: 3px; }
+.ob-btn { background: var(--mumbly-violet); color: #fff; border: none; border-radius: 14px; padding: 13px; width: 100%; font-family: var(--font-body); font-size: 14px; font-weight: 600; cursor: pointer; }
+.ob-skip { font-size: 11px; color: var(--text-muted); text-align: center; margin-top: 10px; }
+
+/* Home */
+.home-screen { background: var(--mumbly-void); height: 100%; display: flex; flex-direction: column; }
+.home-top { padding: 12px 14px 10px; }
+.home-greeting { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--text-primary); }
+.home-date { font-size: 10px; color: var(--text-muted); }
+.home-stat-row { display: flex; gap: 6px; padding: 0 14px 10px; }
+.home-stat { flex: 1; background: var(--mumbly-surface); border-radius: 12px; padding: 8px; }
+.home-stat-val { font-family: var(--font-display); font-size: 18px; font-weight: 800; color: var(--text-primary); }
+.home-stat-lbl { font-size: 9px; color: var(--text-muted); line-height: 1.3; }
+.home-card { margin: 0 14px 8px; background: var(--mumbly-surface); border-radius: 12px; padding: 10px 12px; border: 1px solid var(--mumbly-border); }
+.home-card-lbl { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 4px; }
+.home-card-val { font-size: 12px; color: var(--text-primary); line-height: 1.4; }
+.home-card-meta { font-size: 10px; color: var(--mumbly-violet); margin-top: 4px; }
+.home-feed { flex: 1; overflow: hidden; padding: 0 14px; }
+.home-feed-title { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 6px; }
+.home-item { display: flex; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--mumbly-border); }
+.home-item-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--mumbly-violet); margin-top: 5px; flex-shrink: 0; }
+.home-item-text { font-size: 10px; color: var(--text-secondary); line-height: 1.4; }
+.home-item-time { margin-left: auto; font-size: 9px; color: var(--text-muted); flex-shrink: 0; }
+.bubble-layer { position: absolute; bottom: 56px; right: 12px; width: 48px; height: 48px; border-radius: 50%; background: var(--mumbly-violet); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(107,92,231,0.6); }
+.bubble-ring { position: absolute; bottom: 50px; right: 6px; width: 60px; height: 60px; border-radius: 50%; border: 1.5px solid rgba(107,92,231,0.35); }
+.bottom-nav { height: 42px; background: var(--mumbly-deep); border-top: 1px solid var(--mumbly-border); display: flex; }
+.bnav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; }
+.bnav-icon { font-size: 16px; color: var(--text-muted); }
+.bnav-icon.active { color: var(--mumbly-violet-light); }
+.bnav-lbl { font-size: 8px; color: var(--text-muted); }
+.bnav-lbl.active { color: var(--mumbly-violet-light); }
+
+/* Recording State */
+.rec-screen { background: var(--mumbly-void); height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.rec-ambient { position: absolute; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(232,93,64,0.18) 0%, transparent 70%); }
+.rec-outer-ring { width: 120px; height: 120px; border-radius: 50%; border: 1.5px solid rgba(232,93,64,0.3); display: flex; align-items: center; justify-content: center; }
+.rec-bubble-big { width: 80px; height: 80px; border-radius: 50%; background: var(--mumbly-coral); display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; }
+.waveform-mini { display: flex; align-items: center; gap: 2px; margin: 14px 0; }
+.wbar { width: 3px; border-radius: 2px; background: var(--mumbly-coral); }
+.rec-label { font-family: var(--font-display); font-size: 14px; font-weight: 700; color: var(--text-primary); margin-top: 4px; }
+.rec-timer { font-size: 28px; font-family: var(--font-display); font-weight: 800; color: var(--mumbly-coral); letter-spacing: -1px; }
+.rec-context { font-size: 10px; color: var(--text-secondary); margin-top: 4px; }
+.rec-stop-hint { font-size: 10px; color: var(--text-muted); margin-top: 16px; }
+
+/* Digest Preview */
+.digest-screen { background: var(--mumbly-void); height: 100%; display: flex; flex-direction: column; }
+.digest-top { padding: 12px 14px 8px; }
+.digest-title { font-family: var(--font-display); font-size: 15px; font-weight: 800; color: var(--text-primary); margin-bottom: 2px; }
+.digest-sub { font-size: 10px; color: var(--text-muted); }
+.digest-tabs { display: flex; gap: 4px; padding: 0 14px 8px; }
+.dtab { flex: 1; padding: 5px; border-radius: 8px; font-size: 9px; text-align: center; color: var(--text-muted); background: var(--mumbly-surface); border: 1px solid var(--mumbly-border); }
+.dtab.active { background: var(--mumbly-violet-glow); color: var(--mumbly-violet-light); border-color: rgba(107,92,231,0.3); }
+.digest-body { flex: 1; overflow: hidden; padding: 0 14px; }
+.digest-cluster { margin-bottom: 10px; }
+.digest-cluster-title { display: flex; align-items: center; gap: 6px; font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 5px; }
+.dcluster-dot { width: 6px; height: 6px; border-radius: 50%; }
+.digest-item-card { background: var(--mumbly-surface); border-radius: 10px; padding: 8px 10px; margin-bottom: 4px; border: 1px solid var(--mumbly-border); }
+.di-text { font-size: 10px; color: var(--text-primary); line-height: 1.4; }
+.di-time { font-size: 9px; color: var(--text-muted); margin-top: 3px; }
+
+/* Todo Screen */
+.todo-screen { background: var(--mumbly-void); height: 100%; display: flex; flex-direction: column; }
+.todo-top { padding: 12px 14px 8px; }
+.todo-title { font-family: var(--font-display); font-size: 15px; font-weight: 800; color: var(--text-primary); margin-bottom: 2px; }
+.todo-counts { font-size: 10px; color: var(--text-muted); }
+.todo-body { flex: 1; padding: 0 14px; overflow: hidden; }
+.todo-section { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em; margin: 8px 0 5px; }
+.todo-item-row { display: flex; align-items: flex-start; gap: 8px; padding: 7px 10px; background: var(--mumbly-surface); border-radius: 10px; margin-bottom: 4px; border: 1px solid var(--mumbly-border); }
+.todo-check { width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid var(--mumbly-border2); flex-shrink: 0; margin-top: 1px; }
+.todo-check.done { background: var(--mumbly-green); border-color: var(--mumbly-green); }
+.todo-text-item { font-size: 11px; color: var(--text-primary); line-height: 1.4; flex: 1; }
+.todo-text-item.done { text-decoration: line-through; color: var(--text-muted); }
+.todo-src { font-size: 9px; color: var(--text-muted); margin-top: 2px; }
+.todo-alarm { font-size: 9px; color: var(--mumbly-amber); margin-top: 2px; }
+
+/* Settings */
+.settings-screen { background: var(--mumbly-void); height: 100%; display: flex; flex-direction: column; }
+.settings-top { padding: 12px 14px 10px; }
+.settings-title { font-family: var(--font-display); font-size: 15px; font-weight: 800; color: var(--text-primary); }
+.settings-body { flex: 1; padding: 0 14px; overflow: hidden; }
+.settings-group { margin-bottom: 12px; }
+.settings-group-title { font-size: 9px; color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 5px; }
+.settings-row { display: flex; align-items: center; gap: 8px; padding: 8px 10px; background: var(--mumbly-surface); border-radius: 10px; margin-bottom: 3px; border: 1px solid var(--mumbly-border); }
+.settings-icon { font-size: 14px; color: var(--mumbly-violet-light); flex-shrink: 0; }
+.settings-lbl { font-size: 11px; color: var(--text-primary); flex: 1; }
+.settings-val { font-size: 10px; color: var(--text-muted); }
+.toggle-pill { width: 28px; height: 16px; border-radius: 100px; background: var(--mumbly-violet); position: relative; flex-shrink: 0; }
+.toggle-pill::after { content: ''; width: 12px; height: 12px; border-radius: 50%; background: #fff; position: absolute; right: 2px; top: 2px; }
+.toggle-pill.off { background: var(--mumbly-border2); }
+.toggle-pill.off::after { right: auto; left: 2px; }
+
+/* ── Rules & Guidelines ────────────────────────── */
+.rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.rule-card { background: var(--mumbly-surface); border: 1px solid var(--mumbly-border); border-radius: 16px; padding: var(--sp-md); }
+.rule-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; font-size: 18px; }
+.rule-title { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-family: var(--font-display); }
+.rule-body { font-size: 12px; color: var(--text-secondary); line-height: 1.55; }
+
+.do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.do-card { background: rgba(29,185,116,0.05); border: 1px solid rgba(29,185,116,0.2); border-radius: 14px; padding: 14px; }
+.dont-card { background: rgba(232,93,64,0.05); border: 1px solid rgba(232,93,64,0.2); border-radius: 14px; padding: 14px; }
+.do-label { font-size: 11px; font-weight: 700; color: var(--mumbly-green); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .08em; }
+.dont-label { font-size: 11px; font-weight: 700; color: var(--mumbly-coral); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .08em; }
+.do-item, .dont-item { font-size: 12px; color: var(--text-secondary); padding: 4px 0; line-height: 1.4; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.do-item:last-child, .dont-item:last-child { border: none; }
+
+/* ── Interaction Patterns ──────────────────────── */
+.interaction-row { display: flex; align-items: center; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--mumbly-border); }
+.interaction-row:last-child { border: none; }
+.gesture-pill { background: var(--mumbly-surface); border: 1px solid var(--mumbly-border2); border-radius: 100px; padding: 5px 14px; font-size: 12px; color: var(--mumbly-violet-light); font-weight: 600; white-space: nowrap; min-width: 100px; text-align: center; }
+.interaction-arrow { color: var(--text-muted); font-size: 16px; }
+.interaction-result { font-size: 13px; color: var(--text-secondary); }
+
+/* ── Scrollbar ──────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--mumbly-border2); border-radius: 2px; }
+
+/* ── Hero ──────────────────────────────────── */
+.hero { padding: var(--sp-2xl) 0 var(--sp-xl); border-bottom: 1px solid var(--mumbly-border); margin-bottom: var(--sp-2xl); }
+.hero-eyebrow { font-size: 12px; color: var(--mumbly-violet); font-weight: 600; text-transform: uppercase; letter-spacing: .12em; margin-bottom: 14px; }
+.hero-title { font-family: var(--font-display); font-size: 52px; font-weight: 800; color: var(--text-primary); line-height: 1.0; letter-spacing: -2px; margin-bottom: 16px; }
+.hero-title span { color: var(--mumbly-violet-light); }
+.hero-sub { font-size: 16px; color: var(--text-secondary); line-height: 1.7; max-width: 600px; margin-bottom: var(--sp-lg); }
+.hero-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.hero-tag { background: var(--mumbly-surface); border: 1px solid var(--mumbly-border); border-radius: 100px; padding: 5px 14px; font-size: 12px; color: var(--text-secondary); }
+
+/* ── Waveform animation ──────────────────── */
+@keyframes wave {
+  0%, 100% { height: 4px; }
+  50% { height: 18px; }
+}
+.wbar:nth-child(1) { animation: wave 1.0s ease-in-out infinite; }
+.wbar:nth-child(2) { animation: wave 1.0s ease-in-out 0.1s infinite; }
+.wbar:nth-child(3) { animation: wave 1.0s ease-in-out 0.2s infinite; }
+.wbar:nth-child(4) { animation: wave 1.0s ease-in-out 0.15s infinite; }
+.wbar:nth-child(5) { animation: wave 1.0s ease-in-out 0.05s infinite; }
+.wbar:nth-child(6) { animation: wave 1.0s ease-in-out 0.25s infinite; }
+.wbar:nth-child(7) { animation: wave 1.0s ease-in-out 0.1s infinite; }
+
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.4; }
+  100% { transform: scale(1.3); opacity: 0; }
+}
+.bubble-ring { animation: pulse-ring 2s ease-out infinite; }
+
+@media (max-width: 900px) {
+  .sidebar { display: none; }
+  .main { margin-left: 0; padding: var(--sp-lg); }
+  .screen-block { grid-template-columns: 1fr; }
+  .rules-grid, .do-dont { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="sidebar">
+  <div class="sidebar-logo">Mumbly</div>
+  <div class="sidebar-sub">UI/UX Design Guide</div>
+
+  <div class="nav-section">Foundation</div>
+  <a class="nav-link active" href="#colors"><i class="ti ti-palette"></i> Colors</a>
+  <a class="nav-link" href="#type"><i class="ti ti-typography"></i> Typography</a>
+  <a class="nav-link" href="#spacing"><i class="ti ti-spacing-horizontal"></i> Spacing</a>
+
+  <div class="nav-section">Screens</div>
+  <a class="nav-link" href="#onboarding"><i class="ti ti-door-enter"></i> Onboarding</a>
+  <a class="nav-link" href="#home"><i class="ti ti-home"></i> Home</a>
+  <a class="nav-link" href="#recording"><i class="ti ti-microphone"></i> Recording</a>
+  <a class="nav-link" href="#digest"><i class="ti ti-mail"></i> Digest</a>
+  <a class="nav-link" href="#todos"><i class="ti ti-checkbox"></i> Todos</a>
+  <a class="nav-link" href="#settings"><i class="ti ti-settings"></i> Settings</a>
+  <a class="nav-link" href="#bubble"><i class="ti ti-circle"></i> Bubble</a>
+
+  <div class="nav-section">Guidelines</div>
+  <a class="nav-link" href="#principles"><i class="ti ti-bulb"></i> Principles</a>
+  <a class="nav-link" href="#gestures"><i class="ti ti-hand-finger"></i> Gestures</a>
+  <a class="nav-link" href="#dodont"><i class="ti ti-check"></i> Do / Don't</a>
+</nav>
+
+<main class="main">
+
+  <div class="hero">
+    <div class="hero-eyebrow">UI/UX Design System</div>
+    <div class="hero-title">Design that <span>disappears</span></div>
+    <div class="hero-sub">Mumbly's design philosophy: the interface should be invisible when you don't need it, and instantly present when you do. Every pixel earns its place. Every interaction reduces friction.</div>
+    <div class="hero-tags">
+      <span class="hero-tag">Android-first</span>
+      <span class="hero-tag">Material You influence</span>
+      <span class="hero-tag">Dark mode primary</span>
+      <span class="hero-tag">WCAG AA accessible</span>
+      <span class="hero-tag">48dp touch targets</span>
+    </div>
+  </div>
+
+  <!-- ── COLORS ── -->
+  <section class="section" id="colors">
+    <div class="section-num">01 — Foundation</div>
+    <div class="section-title">Color System</div>
+    <div class="section-desc">Mumbly uses a deep dark base with a single violet accent. The darkness signals trust and discretion — this app handles private thoughts. The violet accent is energetic without being alarming. Coral is reserved exclusively for active recording states.</div>
+
+    <div style="font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:12px;">Background Surfaces</div>
+    <div class="token-grid" style="margin-bottom:24px;">
+      <div class="token-card">
+        <div class="token-swatch" style="background:#0D0B14;border:1px solid rgba(255,255,255,0.1);"></div>
+        <div class="token-name">Void</div>
+        <div class="token-hex">#0D0B14</div>
+        <div class="token-role">App background</div>
+      </div>
+      <div class="token-card">
+        <div class="token-swatch" style="background:#13101E;"></div>
+        <div class="token-name">Deep</div>
+        <div class="token-hex">#13101E</div>
+        <div class="token-role">Sidebar, overlays</div>
+      </div>
+      <div class="token-card">
+        <div class="token-swatch" style="background:#1C1828;"></div>
+        <div class="token-name">Surface</div>
+        <div class="token-hex">#1C1828</div>
+        <div class="token-role">Cards, panels</div>
+      </div>
+      <div class="token-card">
+        <div class="token-swatch" style="background:#231F32;"></div>
+        <div class="token-name">Elevated</div>
+        <div class="token-hex">#231F32</div>
+        <div class="token-role">Modals, sheets</div>
+      </div>
+    </div>
+
+    <div style="font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:12px;">Brand Accents</div>
+    <div class="token-grid" style="margin-bottom:24px;">
+      <div class="token-card">
+        <div class="token-swatch" style="background:linear-gradient(135deg,#6B5CE7,#8B7EF0);"></div>
+        <div class="token-name">Violet</div>
+        <div class="token-hex">#6B5CE7 → #8B7EF0</div>
+        <div class="token-role">Primary action, bubble idle, active states</div>
+      </div>
+      <div class="token-card">
+        <div class="token-swatch" style="background:linear-gradient(135deg,#E85D40,#F07A60);"></div>
+        <div class="token-name">Coral</div>
+        <div class="token-hex">#E85D40 → #F07A60</div>
+        <div class="token-role">Recording state ONLY</div>
+      </div>
+      <div class="token-card">
+        <div class="token-swatch" style="background:#F5A623;"></div>
+        <div class="token-name">Amber</div>
+        <div class="token-hex">#F5A623</div>
+        <div class="token-role">Processing, alarms, warnings</div>
+      </div>
+      <div class="token-card">
+        <div class="token-swatch" style="background:#1DB974;"></div>
+        <div class="token-name">Green</div>
+        <div class="token-hex">#1DB974</div>
+        <div class="token-role">Saved confirmation, todos done</div>
+      </div>
+    </div>
+
+    <div style="background:var(--mumbly-surface);border:1px solid var(--mumbly-border);border-radius:16px;padding:var(--sp-md);">
+      <div style="font-size:13px;font-weight:600;color:var(--text-primary);margin-bottom:10px;">The 60-30-10 Rule</div>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <div style="flex:6;height:32px;border-radius:8px;background:#0D0B14;border:1px solid var(--mumbly-border);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--text-muted);">60% — Background (Void)</div>
+        <div style="flex:3;height:32px;border-radius:8px;background:#1C1828;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--text-muted);">30% — Surface</div>
+        <div style="flex:1;height:32px;border-radius:8px;background:#6B5CE7;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;">10%</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TYPOGRAPHY ── -->
+  <section class="section" id="type">
+    <div class="section-num">01 — Foundation</div>
+    <div class="section-title">Typography</div>
+    <div class="section-desc">Two fonts only. <strong style="color:var(--text-primary);">Syne</strong> for all headings — its wide, geometric nature conveys confidence and modernity. <strong style="color:var(--text-primary);">DM Sans</strong> for body — optically designed for screens, highly readable at small sizes. Default body size: 14px (Android material spec is 16px but Mumbly uses denser, more information-rich layouts).</div>
+
+    <div class="type-scale">
+      <div class="type-row">
+        <span class="type-label">Display</span>
+        <span class="type-sample" style="font-family:var(--font-display);font-size:32px;font-weight:800;letter-spacing:-1px;">Mumbly</span>
+        <span class="type-spec">Syne 800 · 32px · -1px</span>
+      </div>
+      <div class="type-row">
+        <span class="type-label">H1 — Screen</span>
+        <span class="type-sample" style="font-family:var(--font-display);font-size:22px;font-weight:800;">Your captures</span>
+        <span class="type-spec">Syne 800 · 22px</span>
+      </div>
+      <div class="type-row">
+        <span class="type-label">H2 — Section</span>
+        <span class="type-sample" style="font-family:var(--font-display);font-size:16px;font-weight:700;">Today's Ideas</span>
+        <span class="type-spec">Syne 700 · 16px</span>
+      </div>
+      <div class="type-row">
+        <span class="type-label">Body — Default</span>
+        <span class="type-sample" style="font-size:14px;">Called dentist re: appointment</span>
+        <span class="type-spec">DM Sans 400 · 14px</span>
+      </div>
+      <div class="type-row">
+        <span class="type-label">Body — Small</span>
+        <span class="type-sample" style="font-size:12px;color:var(--text-secondary);">2 minutes ago · #work</span>
+        <span class="type-spec">DM Sans 400 · 12px</span>
+      </div>
+      <div class="type-row">
+        <span class="type-label">Label / Tag</span>
+        <span class="type-sample" style="font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;font-weight:600;">RECORDINGS</span>
+        <span class="type-spec">DM Sans 600 · 10px · UC</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SPACING ── -->
+  <section class="section" id="spacing">
+    <div class="section-num">01 — Foundation</div>
+    <div class="section-title">Spacing Scale</div>
+    <div class="section-desc">Base unit: 4px. All spacing is a multiple of 4. Touch targets minimum 48×48dp (Google Material spec). Screen edge padding: 16dp consistently.</div>
+
+    <div style="background:var(--mumbly-surface);border:1px solid var(--mumbly-border);border-radius:16px;padding:var(--sp-md);">
+      <div class="spacing-row"><div class="sp-bar" style="width:4px;"></div><div class="sp-label">xs — micro spacing, icon gaps</div><div class="sp-val">4px</div></div>
+      <div class="spacing-row"><div class="sp-bar" style="width:8px;"></div><div class="sp-label">sm — inner card padding</div><div class="sp-val">8px</div></div>
+      <div class="spacing-row"><div class="sp-bar" style="width:16px;"></div><div class="sp-label">md — screen edge, card padding</div><div class="sp-val">16px</div></div>
+      <div class="spacing-row"><div class="sp-bar" style="width:24px;"></div><div class="sp-label">lg — section gaps</div><div class="sp-val">24px</div></div>
+      <div class="spacing-row"><div class="sp-bar" style="width:40px;"></div><div class="sp-label">xl — large section spacing</div><div class="sp-val">40px</div></div>
+      <div class="spacing-row"><div class="sp-bar" style="width:48px;background:var(--mumbly-coral);"></div><div class="sp-label" style="color:var(--mumbly-coral-light);">Touch target minimum</div><div class="sp-val" style="color:var(--mumbly-coral);">48dp</div></div>
+    </div>
+  </section>
+
+  <!-- ── ONBOARDING ── -->
+  <section class="section" id="onboarding">
+    <div class="section-num">02 — Screens</div>
+    <div class="section-title">Onboarding</div>
+
+    <div class="screen-block">
+      <div class="phone-frame">
+        <div class="phone-outer">
+          <div class="phone-notch-bar"><div class="phone-notch"></div></div>
+          <div class="phone-screen">
+            <div class="ob-screen">
+              <div class="ob-glow">
+                <div class="ob-icon"><i class="ti ti-microphone" style="color:#fff;font-size:28px;"></i></div>
+              </div>
+              <div class="ob-title">Meet Mumbly</div>
+              <div class="ob-sub">Your on-the-go second brain. Tap once. Say anything. Never lose a thought again.</div>
+              <div class="ob-dots">
+                <div class="ob-dot active"></div>
+                <div class="ob-dot"></div>
+                <div class="ob-dot"></div>
+                <div class="ob-dot"></div>
+              </div>
+              <div style="flex:1;"></div>
+              <button class="ob-btn">Get started</button>
+              <div class="ob-skip">Already have an account? Sign in</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="screen-info">
+        <div class="screen-tag"><i class="ti ti-door-enter"></i> Screen 1 of 6</div>
+        <div class="screen-name">Onboarding Flow</div>
+        <div class="screen-desc">A 4-step onboarding that explains the core value prop, requests permissions with clear explanations, and gets the user to their first capture in under 90 seconds. No account required to start.</div>
+
+        <div class="spec-block">
+          <div class="spec-label">4 Onboarding Screens</div>
+          <ul class="spec-list">
+            <li><strong>Screen 1 — Welcome:</strong> Brand moment. Animated glow bubble. Single CTA "Get started".</li>
+            <li><strong>Screen 2 — How it works:</strong> 3-step animation: Tap bubble → speak → get digest. No walls of text.</li>
+            <li><strong>Screen 3 — Permissions:</strong> Mic + overlay + notifications. Each with a clear human reason why. "We need mic to transcribe. Nothing is recorded unless you tap."</li>
+            <li><strong>Screen 4 — Set digest time:</strong> Time picker for daily email. Pre-filled to 9 PM. Email input. User can skip.</li>
+          </ul>
+        </div>
+
+        <div class="spec-block">
+          <div class="spec-label">Design Rules</div>
+          <ul class="spec-list">
+            <li>Progress dots always visible — user knows where they are</li>
+            <li>Back navigation always available — no traps</li>
+            <li>Skip option on every screen after Screen 1</li>
+            <li>Single action per screen — no decision overload</li>
+            <li>Permission rationale on the screen BEFORE the OS dialog</li>
+          </ul>
+        </div>
+
+        <div class="chip-row">
+          <span class="chip v">Syne Display font</span>
+          <span class="chip v">Animated glow orb</span>
+          <span class="chip g">Progress dots</span>
+          <span class="chip c">Minimal text</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HOME ── -->
+  <section class="section" id="home">
+    <div class="section-num">02 — Screens</div>
+    <div class="section-title">Home Screen</div>
+
+    <div class="screen-block">
+      <div class="phone-frame">
+        <div class="phone-outer">
+          <div class="phone-notch-bar"><div class="phone-notch"></div></div>
+          <div class="phone-screen">
+            <div class="home-screen">
+              <div class="home-top">
+                <div class="home-greeting">Good evening 👋</div>
+                <div class="home-date">Thursday, May 21 — 9:41 PM</div>
+              </div>
+              <div class="home-stat-row">
+                <div class="home-stat"><div class="home-stat-val">12</div><div class="home-stat-lbl">Captures today</div></div>
+                <div class="home-stat"><div class="home-stat-val">4</div><div class="home-stat-lbl">Todos found</div></div>
+                <div class="home-stat"><div class="home-stat-val" style="color:var(--mumbly-amber);">2</div><div class="home-stat-lbl">Alarms set</div></div>
+              </div>
+              <div class="home-card">
+                <div class="home-card-lbl">Next alarm</div>
+                <div class="home-card-val">Call investor — Tomorrow 10:00 AM</div>
+                <div class="home-card-meta">From capture "investor deck review"</div>
+              </div>
+              <div class="home-card">
+                <div class="home-card-lbl">Digest sends in</div>
+                <div class="home-card-val">Tonight at 9:00 PM · 12 captures ready</div>
+                <div class="home-card-meta">Preview digest →</div>
+              </div>
+              <div class="home-feed">
+                <div class="home-feed-title">Recent captures</div>
+                <div class="home-item"><div class="home-item-dot"></div><div class="home-item-text">Follow up with Rahul about Q3 numbers...</div><div class="home-item-time">2m</div></div>
+                <div class="home-item"><div class="home-item-dot" style="background:var(--mumbly-coral);"></div><div class="home-item-text">Great idea — subscription box for...</div><div class="home-item-time">18m</div></div>
+                <div class="home-item"><div class="home-item-dot" style="background:var(--mumbly-amber);"></div><div class="home-item-text">Buy birthday cake for Priya on Friday</div><div class="home-item-time">1hr</div></div>
+              </div>
+              <div class="bubble-layer"><i class="ti ti-microphone" style="color:#fff;font-size:20px;"></i></div>
+              <div class="bubble-ring"></div>
+              <div class="bottom-nav">
+                <div class="bnav-item"><i class="ti ti-home bnav-icon active"></i><div class="bnav-lbl active">Home</div></div>
+                <div class="bnav-item"><i class="ti ti-list bnav-icon"></i><div class="bnav-lbl">Todos</div></div>
+                <div class="bnav-item"><i class="ti ti-clock bnav-icon"></i><div class="bnav-lbl">History</div></div>
+                <div class="bnav-item"><i class="ti ti-settings bnav-icon"></i><div class="bnav-lbl">Settings</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="screen-info">
+        <div class="screen-tag"><i class="ti ti-home"></i> Primary Screen</div>
+        <div class="screen-name">Home</div>
+        <div class="screen-desc">The command center. Shows the day's captures at a glance, upcoming alarms, digest countdown, and recent captures feed. The floating bubble is always visible here. No deep navigation required — everything important is surfaced.</div>
+
+        <div class="spec-block">
+          <div class="spec-label">Layout Structure (top to bottom)</div>
+          <ul class="spec-list">
+            <li><strong>Status bar area (28dp):</strong> Transparent, system time visible</li>
+            <li><strong>Greeting + date (48dp):</strong> Personalized greeting + current date. Changes based on time of day.</li>
+            <li><strong>3-stat strip (72dp):</strong> Today's captures / Todos found / Alarms. Tap any to navigate to that section.</li>
+            <li><strong>Context cards (variable):</strong> Next alarm + Digest countdown. Smart — hidden if nothing relevant.</li>
+            <li><strong>Captures feed (flex):</strong> Last 5 captures, scrollable. Color-coded dots by tag type.</li>
+            <li><strong>Floating bubble:</strong> Always at bottom-right, above bottom nav. 56dp circle.</li>
+            <li><strong>Bottom nav (56dp):</strong> Home / Todos / History / Settings. 4 items max.</li>
+          </ul>
+        </div>
+
+        <div class="spec-block">
+          <div class="spec-label">Capture Dot Colors</div>
+          <ul class="spec-list">
+            <li>Violet (#6B5CE7) — Work / meetings</li>
+            <li>Coral (#E85D40) — Ideas</li>
+            <li>Amber (#F5A623) — Todos / reminders</li>
+            <li>Green (#1DB974) — Personal / health</li>
+            <li>Cyan (#22D3EE) — Finance</li>
+          </ul>
+        </div>
+
+        <div class="chip-row">
+          <span class="chip v">Glanceable layout</span>
+          <span class="chip v">Always-visible bubble</span>
+          <span class="chip g">Bottom navigation</span>
+          <span class="chip c">4 nav items max</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── RECORDING ── -->
+  <section class="section" id="recording">
+    <div class="section-num">02 — Screens</div>
+    <div class="section-title">Recording State</div>
+
+    <div class="screen-block">
+      <div class="phone-frame">
+        <div class="phone-outer">
+          <div class="phone-notch-bar"><div class="phone-notch"></div></div>
+          <div class="phone-screen">
+            <div class="rec-screen">
+              <div class="rec-ambient"></div>
+              <div class="rec-timer">00:08</div>
+              <div class="rec-context" style="margin-bottom:12px;">Tap anywhere to stop</div>
+              <div class="rec-outer-ring">
+                <div class="rec-bubble-big">
+                  <i class="ti ti-player-stop" style="color:#fff;font-size:24px;"></i>
+                </div>
+              </div>
+              <div class="waveform-mini">
+                <div class="wbar" style="height:6px;"></div>
+                <div class="wbar" style="height:14px;"></div>
+                <div class="wbar" style="height:22px;"></div>
+                <div class="wbar" style="height:10px;"></div>
+                <div class="wbar" style="height:18px;"></div>
+                <div class="wbar" style="height:8px;"></div>
+                <div class="wbar" style="height:20px;"></div>
+              </div>
+              <div class="rec-label">Listening...</div>
+              <div class="rec-stop-hint">or tap bubble to stop</div>
+              <div style="position:absolute;bottom:16px;width:100%;display:flex;justify-content:center;gap:16px;">
+                <div style="font-size:10px;color:var(--text-muted);text-align:center;">
+                  <i class="ti ti-tag" style="font-size:14px;color:var(--mumbly-amber);display:block;margin-bottom:2px;"></i>Tag
+                </div>
+                <div style="font-size:10px;color:var(--text-muted);text-align:center;">
+                  <i class="ti ti-x" style="font-size:14px;color:var(--mumbly-coral);display:block;margin-bottom:2px;"></i>Cancel
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="screen-info">
+        <div class="screen-tag"><i class="ti ti-microphone"></i> Active State</div>
+        <div class="screen-name">Recording</div>
+        <div class="screen-desc">This screen appears when the bubble is tapped. The entire interface shifts to coral — a strong visual signal that recording is active. The user can stop by tapping anywhere, the bubble, or the stop button. No confusion about state.</div>
+
+        <div class="spec-block">
+          <div class="spec-label">Visual State Changes</div>
+          <ul class="spec-list">
+            <li><strong>Idle bubble:</strong> Violet with microphone icon + slow pulse ring</li>
+            <li><strong>Recording bubble:</strong> Coral, transitions to stop icon, ambient coral glow fills screen</li>
+            <li><strong>Processing (after stop):</strong> Amber pulse + spinner. "Transcribing..." text. ~2 seconds.</li>
+            <li><strong>Saved:</strong> Green flash + checkmark + "Saved" toast for 1.5s. Returns to previous state.</li>
+          </ul>
+        </div>
+
+        <div class="spec-block">
+          <div class="spec-label">Accessibility</div>
+          <ul class="spec-list">
+            <li>TalkBack announces "Recording started" and "Recording stopped"</li>
+            <li>Recording indicator in notification bar (Android requirement)</li>
+            <li>Tap anywhere on screen stops recording — large hit target</li>
+            <li>Timer so user knows how long they've been talking</li>
+          </ul>
+        </div>
+
+        <div class="chip-row">
+          <span class="chip c">Coral brand color</span>
+          <span class="chip v">Animated waveform</span>
+          <span class="chip g">Tap-anywhere to stop</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── DIGEST ── -->
+  <section class="section" id="digest">
+    <div class="section-num">02 — Screens</div>
+    <div class="section-title">Digest Preview</div>
+
+    <div class="screen-block">
+      <div class="phone-frame">
+        <div class="phone-outer">
+          <div class="phone-notch-bar"><div class="phone-notch"></div></div>
+          <div class="phone-screen">
+            <div class="digest-screen">
+              <div class="digest-top">
+                <div class="digest-title">Today's Digest</div>
+                <div class="digest-sub">Thursday, May 21 · 12 captures · sending at 9 PM</div>
+              </div>
+              <div class="digest-tabs">
+                <div class="dtab active">All</div>
+                <div class="dtab">Work</div>
+                <div class="dtab">Ideas</div>
+                <div class="dtab">Todos</div>
+              </div>
+              <div class="digest-body">
+                <div class="digest-cluster">
+                  <div class="digest-cluster-title"><div class="dcluster-dot" style="background:var(--mumbly-violet);"></div>WORK · 5 captures</div>
+                  <div class="digest-item-card">
+                    <div class="di-text">Follow up with Rahul re: Q3 numbers before Friday EOD</div>
+                    <div class="di-time">2:14 PM · extracted todo</div>
+                  </div>
+                  <div class="digest-item-card">
+                    <div class="di-text">Investor deck needs updated revenue projections slide</div>
+                    <div class="di-time">4:30 PM · idea</div>
+                  </div>
+                </div>
+                <div class="digest-cluster">
+                  <div class="digest-cluster-title"><div class="dcluster-dot" style="background:var(--mumbly-coral);"></div>IDEAS · 3 captures</div>
+                  <div class="digest-item-card">
+                    <div class="di-text">Subscription tier for teams — shared capture workspace</div>
+                    <div class="di-time">11:05 AM · idea</div>
+                  </div>
+                </div>
+                <div class="digest-cluster">
+                  <div class="digest-cluster-title"><div class="dcluster-dot" style="background:var(--mumbly-amber);"></div>PERSONAL · 4 captures</div>
+                  <div class="digest-item-card">
+                    <div class="di-text">Buy birthday cake for Priya — Friday before 6 PM</div>
+                    <div class="di-time">6:20 PM · reminder set</div>
+                  </div>
+                </div>
+              </div>
+              <div class="bottom-nav">
+                <div class="bnav-item"><i class="ti ti-home bnav-icon"></i><div class="bnav-lbl">Home</div></div>
+                <div class="bnav-item"><i class="ti ti-list bnav-icon"></i><div class="bnav-lbl">Todos</div></div>
+                <div class="bnav-item"><i class="ti ti-mail bnav-icon active"></i><div class="bnav-lbl active">Digest</div></div>
+                <div class="bnav-item"><i class="ti ti-settings bnav-icon"></i><div class="bnav-lbl">Settings</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="screen-info">
+        <div class="screen-tag"><i class="ti ti-mail"></i> Screen</div>
+        <div class="screen-name">Daily Digest</div>
+        <div class="screen-desc">In-app preview of what will be emailed at the user's set time. Captures are clustered by AI into Work, Ideas, Personal, Health, Finance. Tabs for quick filtering. Each card is tappable to play source audio.</div>
+
+        <div class="spec-block">
+          <div class="spec-label">Cluster Logic</div>
+          <ul class="spec-list">
+            <li>Gemini Nano classifies each capture into a category at transcription time</li>
+            <li>Categories: Work, Ideas, Personal, Health, Finance, Misc</li>
+            <li>Each cluster has a color dot that matches the capture feed on Home</li>
+            <li>Sorted by capture count descending — most active category first</li>
+            <li>Empty clusters are hidden (not shown as empty sections)</li>
+          </ul>
+        </div>
+
+        <div class="spec-block">
+          <div class="spec-label">Card Interactions</div>
+          <ul class="spec-list">
+            <li>Tap card → play original audio + show full transcript</li>
+            <li>Long press → quick actions: Add to todo / Set alarm / Share / Delete</li>
+            <li>Swipe right on card → mark as reviewed (grays out)</li>
+            <li>"Send now" button in top-right for manual send</li>
+          </ul>
+        </div>
+
+        <div class="chip-row">
+          <span class="chip v">AI-clustered content</span>
+          <span class="chip v">Tab filtering</span>
+          <span class="chip g">Tap to play audio</span>
+          <span class="chip c">Color-coded clusters</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TODOS ── -->
+  <section class="section" id="todos">
+    <div class="section-num">02 — Screens</div>
+    <div class="section-title">Todos & Alarms</div>
+
+    <div class="screen-block">
+      <div class="phone-frame">
+        <div class="phone-outer">
+          <div class="phone-notch-bar"><div class="phone-notch"></div></div>
+          <div class="phone-screen">
+            <div class="todo-screen">
+              <div class="todo-top">
+                <div class="todo-title">Tasks & Alarms</div>
+                <div class="todo-counts">4 open · 2 completed · 2 alarms</div>
+              </div>
+              <div class="todo-body">
+                <div class="todo-section">Open Tasks</div>
+                <div class="todo-item-row">
+                  <div class="todo-check"></div>
+                  <div>
+                    <div class="todo-text-item">Follow up with Rahul re Q3</div>
+                    <div class="todo-src">From: "investor meeting recap" · 2 PM</div>
+                    <div class="todo-alarm">⏰ Reminder: Friday 10 AM</div>
+                  </div>
+                </div>
+                <div class="todo-item-row">
+                  <div class="todo-check"></div>
+                  <div>
+                    <div class="todo-text-item">Buy birthday cake for Priya</div>
+                    <div class="todo-src">From: "evening reminders" · 6 PM</div>
+                    <div class="todo-alarm">⏰ Reminder: Friday 5 PM</div>
+                  </div>
+                </div>
+                <div class="todo-item-row">
+                  <div class="todo-check"></div>
+                  <div>
+                    <div class="todo-text-item">Update investor deck revenue slide</div>
+                    <div class="todo-src">From: "deck review" · 4 PM</div>
+                  </div>
+                </div>
+                <div class="todo-section">Completed</div>
+                <div class="todo-item-row">
+                  <div class="todo-check done"></div>
+                  <div><div class="todo-text-item done">Call dentist to reschedule</div></div>
+                </div>
+              </div>
+              <div class="bottom-nav">
+                <div class="bnav-item"><i class="ti ti-home bnav-icon"></i><div class="bnav-lbl">Home</div></div>
+                <div class="bnav-item"><i class="ti ti-list bnav-icon active"></i><div class="bnav-lbl active">Todos</div></div>
+                <div class="bnav-item"><i class="ti ti-mail bnav-icon"></i><div class="bnav-lbl">Digest</div></div>
+                <div class="bnav-item"><i class="ti ti-settings bnav-icon"></i><div class="bnav-lbl">Settings</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="screen-info">
+        <div class="screen-tag"><i class="ti ti-checkbox"></i> Screen</div>
+        <div class="screen-name">Todos & Alarms</div>
+        <div class="screen-desc">Auto-extracted tasks from voice captures. Each todo links back to its source capture. Alarms set via voice appear here with their time. No manual input needed — but user can edit, add manually, or snooze.</div>
+
+        <div class="spec-block">
+          <div class="spec-label">Todo Card Anatomy</div>
+          <ul class="spec-list">
+            <li><strong>Circle checkbox:</strong> 20dp, tap to complete with satisfying scale animation</li>
+            <li><strong>Task text:</strong> 14px DM Sans, max 2 lines before truncating</li>
+            <li><strong>Source attribution:</strong> "From: capture name · time" in 11px muted text — links to audio</li>
+            <li><strong>Alarm indicator:</strong> Amber ⏰ text if a reminder was detected or set</li>
+            <li><strong>Swipe left:</strong> Delete with undo toast (3 seconds)</li>
+            <li><strong>Swipe right:</strong> Mark complete</li>
+          </ul>
+        </div>
+
+        <div class="spec-block">
+          <div class="spec-label">Sort & Filter</div>
+          <ul class="spec-list">
+            <li>Default: Open tasks first, sorted by detected urgency (time-bound tasks float up)</li>
+            <li>Completed section collapses after 5 items with "Show all" expander</li>
+            <li>FAB for manual task add (+ button, bottom-right near bubble)</li>
+          </ul>
+        </div>
+
+        <div class="chip-row">
+          <span class="chip v">Auto-extracted from voice</span>
+          <span class="chip g">Source attribution</span>
+          <span class="chip c">Swipe gestures</span>
+          <span class="chip v">Alarm integration</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SETTINGS ── -->
+  <section class="section" id="settings">
+    <div class="section-num">02 — Screens</div>
+    <div class="section-title">Settings</div>
+
+    <div class="screen-block">
+      <div class="phone-frame">
+        <div class="phone-outer">
+          <div class="phone-notch-bar"><div class="phone-notch"></div></div>
+          <div class="phone-screen">
+            <div class="settings-screen">
+              <div class="settings-top"><div class="settings-title">Settings</div></div>
+              <div class="settings-body">
+                <div class="settings-group">
+                  <div class="settings-group-title">Digest</div>
+                  <div class="settings-row">
+                    <i class="ti ti-clock settings-icon"></i>
+                    <div class="settings-lbl">Send time</div>
+                    <div class="settings-val">9:00 PM</div>
+                  </div>
+                  <div class="settings-row">
+                    <i class="ti ti-mail settings-icon"></i>
+                    <div class="settings-lbl">Email address</div>
+                    <div class="settings-val">me@gmail.com</div>
+                  </div>
+                </div>
+                <div class="settings-group">
+                  <div class="settings-group-title">Capture</div>
+                  <div class="settings-row">
+                    <i class="ti ti-language settings-icon"></i>
+                    <div class="settings-lbl">Language</div>
+                    <div class="settings-val">Hinglish</div>
+                  </div>
+                  <div class="settings-row">
+                    <i class="ti ti-microphone settings-icon"></i>
+                    <div class="settings-lbl">Max clip length</div>
+                    <div class="settings-val">5 min</div>
+                  </div>
+                </div>
+                <div class="settings-group">
+                  <div class="settings-group-title">Privacy</div>
+                  <div class="settings-row">
+                    <i class="ti ti-lock settings-icon"></i>
+                    <div class="settings-lbl">On-device only</div>
+                    <div class="toggle-pill"></div>
+                  </div>
+                  <div class="settings-row">
+                    <i class="ti ti-cloud settings-icon"></i>
+                    <div class="settings-lbl">Cloud sync</div>
+                    <div class="toggle-pill off"></div>
+                  </div>
+                </div>
+                <div class="settings-group">
+                  <div class="settings-group-title">Account</div>
+                  <div class="settings-row">
+                    <i class="ti ti-crown settings-icon" style="color:var(--mumbly-amber);"></i>
+                    <div class="settings-lbl">Upgrade to Pro</div>
+                    <div class="settings-val" style="color:var(--mumbly-violet-light);">₹499/mo</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="screen-info">
+        <div class="screen-tag"><i class="ti ti-settings"></i> Screen</div>
+        <div class="screen-name">Settings</div>
+        <div class="screen-desc">Clean, grouped settings with no visual noise. Toggles for privacy settings are prominent. The upgrade to Pro is surfaced naturally without being pushy — one row, never a popup.</div>
+
+        <div class="spec-block">
+          <div class="spec-label">Settings Groups</div>
+          <ul class="spec-list">
+            <li><strong>Digest:</strong> Send time (time picker), email address, format preferences</li>
+            <li><strong>Capture:</strong> Language, clip length, auto-tagging on/off, noise reduction</li>
+            <li><strong>Privacy:</strong> On-device toggle (default ON), cloud sync, data export, delete all</li>
+            <li><strong>Notifications:</strong> Alarm style, digest reminder, weekly wrap</li>
+            <li><strong>Integrations:</strong> Google Calendar, Notion, Google Tasks (Pro tier)</li>
+            <li><strong>Account:</strong> Pro upgrade, subscription management, help</li>
+          </ul>
+        </div>
+
+        <div class="spec-block">
+          <div class="spec-label">Upgrade UX Rules</div>
+          <ul class="spec-list">
+            <li>Never show a paywall popup without user action</li>
+            <li>Pro features are visible but locked with a subtle lock icon — not hidden</li>
+            <li>Upgrade row appears once in settings, never as a banner or modal</li>
+            <li>Free tier clearly shows remaining allowance (e.g., "18/20 captures used")</li>
+          </ul>
+        </div>
+
+        <div class="chip-row">
+          <span class="chip v">Grouped layout</span>
+          <span class="chip g">Privacy-first defaults</span>
+          <span class="chip c">Non-pushy upgrade row</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BUBBLE ── -->
+  <section class="section" id="bubble">
+    <div class="section-num">02 — Screens</div>
+    <div class="section-title">The Bubble — States</div>
+    <div class="section-desc">The bubble is the most critical UI element. It must communicate state clearly at a glance with no text. Four distinct states, each with a unique color + icon + animation combination.</div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:40px;">
+      <div style="background:var(--mumbly-surface);border:1px solid var(--mumbly-border);border-radius:16px;padding:16px;text-align:center;">
+        <div style="width:64px;height:64px;border-radius:50%;background:var(--mumbly-violet);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;box-shadow:0 4px 20px rgba(107,92,231,0.5);">
+          <i class="ti ti-microphone" style="color:#fff;font-size:26px;"></i>
+        </div>
+        <div style="font-size:12px;font-weight:600;color:var(--text-primary);margin-bottom:4px;">Idle</div>
+        <div style="font-size:11px;color:var(--text-muted);line-height:1.4;">Violet · slow pulse ring · mic icon</div>
+      </div>
+      <div style="background:var(--mumbly-surface);border:1px solid var(--mumbly-border);border-radius:16px;padding:16px;text-align:center;">
+        <div style="width:64px;height:64px;border-radius:50%;background:var(--mumbly-coral);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;box-shadow:0 4px 20px rgba(232,93,64,0.5);">
+          <i class="ti ti-player-stop" style="color:#fff;font-size:26px;"></i>
+        </div>
+        <div style="font-size:12px;font-weight:600;color:var(--text-primary);margin-bottom:4px;">Recording</div>
+        <div style="font-size:11px;color:var(--text-muted);line-height:1.4;">Coral · waveform pulse · stop icon</div>
+      </div>
+      <div style="background:var(--mumbly-surface);border:1px solid var(--mumbly-border);border-radius:16px;padding:16px;text-align:center;">
+        <div style="width:64px;height:64px;border-radius:50%;background:var(--mumbly-amber);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;box-shadow:0 4px 20px rgba(245,166,35,0.4);">
+          <i class="ti ti-loader-2" style="color:#fff;font-size:26px;"></i>
+        </div>
+        <div style="font-size:12px;font-weight:600;color:var(--text-primary);margin-bottom:4px;">Processing</div>
+        <div style="font-size:11px;color:var(--text-muted);line-height:1.4;">Amber · spinner · ~2 seconds</div>
+      </div>
+      <div style="background:var(--mumbly-surface);border:1px solid var(--mumbly-border);border-radius:16px;padding:16px;text-align:center;">
+        <div style="width:64px;height:64px;border-radius:50%;background:var(--mumbly-green);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;box-shadow:0 4px 20px rgba(29,185,116,0.4);">
+          <i class="ti ti-check" style="color:#fff;font-size:26px;"></i>
+        </div>
+        <div style="font-size:12px;font-weight:600;color:var(--text-primary);margin-bottom:4px;">Saved</div>
+        <div style="font-size:11px;color:var(--text-muted);line-height:1.4;">Green flash · check · auto-fades 1.5s</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PRINCIPLES ── -->
+  <section class="section" id="principles">
+    <div class="section-num">03 — Guidelines</div>
+    <div class="section-title">Design Principles</div>
+    <div class="section-desc">Every design decision must pass through these five principles. If a proposed feature or UI element fails any of them, it doesn't ship.</div>
+
+    <div class="rules-grid">
+      <div class="rule-card">
+        <div class="rule-icon" style="background:rgba(107,92,231,0.15);">⚡</div>
+        <div class="rule-title">Sub-1-second to capture</div>
+        <div class="rule-body">From thought to recording must be under 1 second. If any step in the flow adds latency or friction, it's cut. The bubble tap must feel instant.</div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-icon" style="background:rgba(29,185,116,0.15);">🔒</div>
+        <div class="rule-title">Privacy visible by default</div>
+        <div class="rule-body">The "on-device only" toggle is ON by default. Privacy icons are visible in recording state. Users must actively choose to share data, never tricked.</div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-icon" style="background:rgba(245,166,35,0.15);">👁</div>
+        <div class="rule-title">State is always legible</div>
+        <div class="rule-body">A user must be able to tell in under 0.5 seconds: is it recording or not? The color-coded bubble makes this impossible to misread.</div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-icon" style="background:rgba(232,93,64,0.15);">🚫</div>
+        <div class="rule-title">Zero interruption design</div>
+        <div class="rule-body">No unsolicited popups, no forced ratings dialogs, no interstitial ads. The app earns attention — never steals it. Even upgrade prompts are passive.</div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-icon" style="background:rgba(34,211,238,0.15);">✂️</div>
+        <div class="rule-title">If in doubt, cut it</div>
+        <div class="rule-body">Feature creep kills focus apps. Every element on screen must earn its place. When a screen looks "full," remove things — never add more.</div>
+      </div>
+      <div class="rule-card">
+        <div class="rule-icon" style="background:rgba(107,92,231,0.15);">📱</div>
+        <div class="rule-title">Thumb-first design</div>
+        <div class="rule-body">All primary actions reachable with right thumb. Bottom navigation. Bubble in bottom-right. Critical buttons in the bottom 60% of screen. Nothing important above the fold.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── GESTURES ── -->
+  <section class="section" id="gestures">
+    <div class="section-num">03 — Guidelines</div>
+    <div class="section-title">Gesture Vocabulary</div>
+    <div class="section-desc">Consistent gesture patterns across the app. Users learn once, apply everywhere. Never more than 3 gesture actions per screen.</div>
+
+    <div style="background:var(--mumbly-surface);border:1px solid var(--mumbly-border);border-radius:16px;padding:var(--sp-lg);">
+      <div class="interaction-row">
+        <div class="gesture-pill">Tap bubble</div>
+        <i class="ti ti-arrow-right interaction-arrow"></i>
+        <div class="interaction-result">Start / stop recording</div>
+      </div>
+      <div class="interaction-row">
+        <div class="gesture-pill">Long press bubble</div>
+        <i class="ti ti-arrow-right interaction-arrow"></i>
+        <div class="interaction-result">Toggle ambient mode (v2)</div>
+      </div>
+      <div class="interaction-row">
+        <div class="gesture-pill">Drag bubble</div>
+        <i class="ti ti-arrow-right interaction-arrow"></i>
+        <div class="interaction-result">Reposition on screen, snaps to edge</div>
+      </div>
+      <div class="interaction-row">
+        <div class="gesture-pill">Swipe card right</div>
+        <i class="ti ti-arrow-right interaction-arrow"></i>
+        <div class="interaction-result">Complete / mark reviewed (green reveal)</div>
+      </div>
+      <div class="interaction-row">
+        <div class="gesture-pill">Swipe card left</div>
+        <i class="ti ti-arrow-right interaction-arrow"></i>
+        <div class="interaction-result">Delete with undo toast</div>
+      </div>
+      <div class="interaction-row">
+        <div class="gesture-pill">Long press card</div>
+        <i class="ti ti-arrow-right interaction-arrow"></i>
+        <div class="interaction-result">Quick actions sheet (Add todo / Set alarm / Share)</div>
+      </div>
+      <div class="interaction-row">
+        <div class="gesture-pill">Tap capture card</div>
+        <i class="ti ti-arrow-right interaction-arrow"></i>
+        <div class="interaction-result">Expand: play audio + full transcript</div>
+      </div>
+      <div class="interaction-row">
+        <div class="gesture-pill">Pull to refresh</div>
+        <i class="ti ti-arrow-right interaction-arrow"></i>
+        <div class="interaction-result">Re-run AI parsing on unclassified captures</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── DO/DONT ── -->
+  <section class="section" id="dodont">
+    <div class="section-num">03 — Guidelines</div>
+    <div class="section-title">Do / Don't</div>
+    <div class="section-desc">Based on mobile UI research: 88% of users abandon after bad UX. These rules prevent the most common failure modes.</div>
+
+    <div class="do-dont">
+      <div class="do-card">
+        <div class="do-label">✓ Do</div>
+        <div class="do-item">Use 48dp minimum touch targets everywhere</div>
+        <div class="do-item">Show recording state in notification bar (Android requirement)</div>
+        <div class="do-item">Provide haptic feedback on bubble tap</div>
+        <div class="do-item">Animate state transitions (100–200ms, ease-out)</div>
+        <div class="do-item">Support one-handed use — all critical actions in thumb zone</div>
+        <div class="do-item">Test on low-end devices (≥2GB RAM, Android 10)</div>
+        <div class="do-item">Use system fonts as fallback if custom fonts fail to load</div>
+        <div class="do-item">Provide offline-first experience for all core features</div>
+        <div class="do-item">Show empty states with helpful guidance, not just blank screens</div>
+        <div class="do-item">Support dark mode only (primary) + optional light mode later</div>
+      </div>
+      <div class="dont-card">
+        <div class="dont-label">✗ Don't</div>
+        <div class="dont-item">Never show a paywall modal without user initiating upgrade</div>
+        <div class="dont-item">Never use red for anything except destructive actions</div>
+        <div class="dont-item">Never put important actions above the fold (top 40% of screen)</div>
+        <div class="dont-item">Never use more than 2 font families on one screen</div>
+        <div class="dont-item">Never block recording with a loading state</div>
+        <div class="dont-item">Never play audio without user explicitly tapping play</div>
+        <div class="dont-item">Never show more than 1 ad per digest email (free tier)</div>
+        <div class="dont-item">Never require account creation before first capture</div>
+        <div class="dont-item">Never use a bottom sheet for settings — use a full screen</div>
+        <div class="dont-item">Never auto-start recording without explicit user action</div>
+      </div>
+    </div>
+  </section>
+
+  <div style="border-top:1px solid var(--mumbly-border);padding-top:var(--sp-xl);margin-top:var(--sp-xl);text-align:center;">
+    <div style="font-family:var(--font-display);font-size:28px;font-weight:800;color:var(--mumbly-violet-light);margin-bottom:8px;">Mumbly</div>
+    <div style="font-size:13px;color:var(--text-muted);">UI/UX Design Guide v1.0 · May 2026</div>
+    <div style="font-size:12px;color:var(--text-muted);margin-top:6px;">Figma file, component library, and Kotlin design tokens to be published separately</div>
+  </div>
+
+</main>
+
+<script>
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', function() {
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// Active nav on scroll
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 100) current = s.id;
+  });
+  document.querySelectorAll('.nav-link').forEach(l => {
+    l.classList.remove('active');
+    if (l.getAttribute('href') === '#' + current) l.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
